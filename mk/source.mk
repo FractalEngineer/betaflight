@@ -1,4 +1,5 @@
 PG_SRC = \
+            pg/hx711.c \
             pg/adc.c \
             pg/alt_hold_multirotor.c \
             pg/alt_hold_wing.c \
@@ -57,6 +58,7 @@ PG_SRC = \
             pg/vtx_table.c
 
 COMMON_SRC = \
+            drivers/hx711.c \
             build/build_config.c \
             build/debug.c \
             build/version.c \

@@ -159,6 +159,9 @@
 #include "pg/mco.h"
 #include "pg/motor.h"
 #include "pg/pinio.h"
+#ifdef USE_HX711
+#include "drivers/hx711.h"
+#endif
 #include "pg/piniobox.h"
 #include "pg/pin_pull_up_down.h"
 #include "pg/pg.h"
@@ -1075,6 +1078,10 @@ void initPhase3(void)
 #endif
 
     debugInit();
+
+#ifdef USE_HX711
+    hx711Init();
+#endif
 
 #if ENABLE_UNUSED_PINS_INIT
     unusedPinsInit();

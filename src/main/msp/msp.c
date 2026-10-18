@@ -27,6 +27,9 @@
 #include <ctype.h>
 
 #include "platform.h"
+#ifdef USE_HX711
+#include "drivers/hx711.h"
+#endif
 
 #include "blackbox/blackbox.h"
 #include "blackbox/blackbox_io.h"
@@ -844,6 +847,19 @@ RAM_CODE static bool mspCommonProcessOutCommand(mspDescriptor_t srcDesc, int16_t
         sbufWriteBuildInfoFlags(dst);
         break;
 
+#ifdef USE_HX711
+    case MSP2_SENSOR_HX711: {
+        hx711Sample_t sample;
+        hx711GetSample(&sample);
+        sbufWriteU8(dst, 1); // HX711 sample wire version
+        sbufWriteU8(dst, sample.flags);
+        sbufWriteU32(dst, sample.raw);
+        sbufWriteU32(dst, sample.sequence);
+        sbufWriteU32(dst, sample.ageMs);
+        sbufWriteU32(dst, sample.timeUs);
+        break;
+    }
+#endif
     case MSP_ANALOG:
         sbufWriteU8(dst, (uint8_t)constrain(getLegacyBatteryVoltage(), 0, 255));
         sbufWriteU16(dst, (uint16_t)constrain(getMAhDrawn(), 0, 0xFFFF)); // milliamp hours drawn from battery

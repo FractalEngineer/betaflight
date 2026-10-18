@@ -119,6 +119,9 @@
 #endif
 
 #include "tasks.h"
+#ifdef USE_HX711
+#include "drivers/hx711.h"
+#endif
 
 // taskUpdateRxMain() has occasional peaks in execution time so normal moving average duration estimation doesn't work
 // Decay the estimated max task duration by 1/(1 << RX_TASK_DECAY_SHIFT) on every invocation
@@ -158,6 +161,9 @@ static void taskHandleSerial(timeUs_t currentTimeUs)
 
     bool evaluateMspData = ARMING_FLAG(ARMED) ? MSP_SKIP_NON_MSP_DATA : MSP_EVALUATE_NON_MSP_DATA;
     mspSerialProcess(evaluateMspData, mspFcProcessCommand, mspFcProcessReply);
+#ifdef USE_HX711
+    hx711Update();
+#endif
 }
 
 static void taskBatteryAlerts(timeUs_t currentTimeUs)

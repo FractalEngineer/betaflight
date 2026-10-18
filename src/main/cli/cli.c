@@ -76,6 +76,9 @@ bool cliMode = false;
 #include "drivers/flash/flash.h"
 #include "drivers/inverter.h"
 #include "drivers/io.h"
+#ifdef USE_HX711
+#include "pg/hx711.h"
+#endif
 #include "drivers/io_impl.h"
 #include "drivers/lcd_console.h"
 #include "drivers/light_led.h"
@@ -7066,6 +7069,10 @@ typedef struct {
     { owner, pgn, sizeof(type), offsetof(type, member), max }
 
 const cliResourceValue_t resourceTable[] = {
+#ifdef USE_HX711
+    DEFS( OWNER_HX711_SCK, PG_HX711_CONFIG, hx711Config_t, sckTag ),
+    DEFS( OWNER_HX711_DOUT, PG_HX711_CONFIG, hx711Config_t, doutTag ),
+#endif
 #if defined(USE_BEEPER)
     DEFS( OWNER_BEEPER,        PG_BEEPER_DEV_CONFIG, beeperDevConfig_t, ioTag ),
 #endif
