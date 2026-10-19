@@ -76,9 +76,6 @@ bool cliMode = false;
 #include "drivers/flash/flash.h"
 #include "drivers/inverter.h"
 #include "drivers/io.h"
-#ifdef USE_HX711
-#include "pg/hx711.h"
-#endif
 #include "drivers/io_impl.h"
 #include "drivers/lcd_console.h"
 #include "drivers/light_led.h"
@@ -148,6 +145,9 @@ bool cliMode = false;
 #include "pg/dronecan.h"
 #include "pg/flight_plan.h"
 #include "pg/gyrodev.h"
+#ifdef USE_HX711
+#include "pg/hx711.h"
+#endif
 #include "pg/max7456.h"
 #include "pg/mco.h"
 #include "pg/motor.h"

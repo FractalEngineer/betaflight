@@ -1,5 +1,4 @@
 PG_SRC = \
-            pg/hx711.c \
             pg/adc.c \
             pg/alt_hold_multirotor.c \
             pg/alt_hold_wing.c \
@@ -25,6 +24,7 @@ PG_SRC = \
             pg/gps_rescue_multirotor.c \
             pg/gps_rescue_wing.c \
             pg/gyrodev.c \
+            pg/hx711.c \
             pg/launch_wing.c \
             pg/max7456.c \
             pg/mco.c \
@@ -58,7 +58,6 @@ PG_SRC = \
             pg/vtx_table.c
 
 COMMON_SRC = \
-            drivers/hx711.c \
             build/build_config.c \
             build/debug.c \
             build/version.c \
@@ -108,6 +107,7 @@ COMMON_SRC = \
             drivers/display.c \
             drivers/display_canvas.c \
             drivers/dma.c \
+            drivers/hx711.c \
             drivers/io.c \
             drivers/io_preinit.c \
             drivers/lcd_console.c \

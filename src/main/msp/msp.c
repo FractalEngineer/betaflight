@@ -27,9 +27,6 @@
 #include <ctype.h>
 
 #include "platform.h"
-#ifdef USE_HX711
-#include "drivers/hx711.h"
-#endif
 
 #include "blackbox/blackbox.h"
 #include "blackbox/blackbox_io.h"
@@ -63,6 +60,9 @@
 #include "drivers/dshot.h"
 #include "drivers/dshot_command.h"
 #include "drivers/flash/flash.h"
+#ifdef USE_HX711
+#include "drivers/hx711.h"
+#endif
 #include "drivers/io.h"
 #include "drivers/motor.h"
 #include "drivers/osd.h"

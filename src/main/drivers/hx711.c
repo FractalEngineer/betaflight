@@ -1,9 +1,30 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later */
+/*
+ * This file is part of Cleanflight and Betaflight.
+ *
+ * Cleanflight and Betaflight are free software. You can redistribute
+ * this software and/or modify this software under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * Cleanflight and Betaflight are distributed in the hope that they
+ * will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this software.
+ *
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "platform.h"
+
 #ifdef USE_HX711
+
+#include "drivers/hx711.h"
 #include "drivers/io.h"
 #include "drivers/time.h"
-#include "drivers/hx711.h"
 #include "pg/hx711.h"
 
 static IO_t sck, dout;
@@ -47,6 +68,12 @@ void hx711Update(void)
         IOLo(sck);
         __set_PRIMASK(primask);
         delayMicroseconds(1);
+    }
+    // DOUT is released high after the 25th pulse. A line stuck low, for example
+    // a short or a disconnected module, must not clock out zeros and be
+    // reported as a fresh sample; keep the previous reading to age out instead.
+    if (!IORead(dout)) {
+        return;
     }
     raw = (int32_t)(bits & 0x7fffff) - (int32_t)(bits & 0x800000);
     saturated = raw == -8388608 || raw == 8388607;

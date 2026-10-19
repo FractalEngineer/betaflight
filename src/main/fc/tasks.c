@@ -38,6 +38,9 @@
 #include "drivers/accgyro/accgyro.h"
 #include "drivers/camera_control.h"
 #include "drivers/compass/compass.h"
+#ifdef USE_HX711
+#include "drivers/hx711.h"
+#endif
 #include "drivers/sensor.h"
 #include "drivers/serial.h"
 #include "drivers/serial_usb_vcp.h"
@@ -119,9 +122,6 @@
 #endif
 
 #include "tasks.h"
-#ifdef USE_HX711
-#include "drivers/hx711.h"
-#endif
 
 // taskUpdateRxMain() has occasional peaks in execution time so normal moving average duration estimation doesn't work
 // Decay the estimated max task duration by 1/(1 << RX_TASK_DECAY_SHIFT) on every invocation

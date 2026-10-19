@@ -55,4 +55,4 @@
 // next new variable type must be >= MSP2TEXT_BATTERY_PROFILE_NAME + 1 (12)
 
 // Project-local HX711 raw sample extension, wire version 1.
-#define MSP2_SENSOR_HX711                  0x30F0
+#define MSP2_SENSOR_HX711                  0x3013

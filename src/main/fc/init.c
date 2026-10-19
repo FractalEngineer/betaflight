@@ -59,6 +59,9 @@
 #include "drivers/dshot.h"
 #include "drivers/exti.h"
 #include "drivers/flash/flash.h"
+#ifdef USE_HX711
+#include "drivers/hx711.h"
+#endif
 #include "drivers/inverter.h"
 #include "drivers/io.h"
 #include "drivers/light_led.h"
@@ -159,9 +162,6 @@
 #include "pg/mco.h"
 #include "pg/motor.h"
 #include "pg/pinio.h"
-#ifdef USE_HX711
-#include "drivers/hx711.h"
-#endif
 #include "pg/piniobox.h"
 #include "pg/pin_pull_up_down.h"
 #include "pg/pg.h"
